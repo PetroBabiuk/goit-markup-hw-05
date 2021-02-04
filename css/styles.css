@@ -119,13 +119,28 @@ ol {
   font-size: 14px;
   line-height: 1.14;
   text-decoration: none;
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .site-nav .link:hover,
 .site-nav .link:focus {
   color: var(--primary-accent-color);
 }
 .site-nav .link.current {
+  position: relative;
+
   color: var(--primary-accent-color);
+}
+
+.link.current::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  content: '';
+  width: 100%;
+  height: 4px;
+  background-color: var(--primary-accent-color);
+  border-radius: 2px;
 }
 .auth-nav {
   display: flex;
@@ -150,6 +165,8 @@ ol {
   font-size: 14px;
   line-height: 1.14;
   text-decoration: none;
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .contacts-icon {
@@ -312,6 +329,27 @@ ol {
 .what-we-do-list .item + .item {
   margin-left: 30px;
 }
+
+.what-we-do-thumb {
+  position: relative;
+}
+.what-we-do-description {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.14;
+  text-align: center;
+  text-transform: uppercase;
+
+  color: #ffffff;
+  width: 100%;
+  height: 70px;
+  padding-top: 27px;
+  padding-bottom: 27px;
+  background-color: rgba(47, 48, 58, 0.8);
+}
 /*our team*/
 .our-team {
   background-color: var(--portfolio-button-bgc);
@@ -375,6 +413,9 @@ ol {
   height: 44px;
   border-radius: 50%;
   color: var(--social-icon-color);
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .social-icon {
   width: 20px;
@@ -400,6 +441,10 @@ ol {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .customers-list .item + .item {
@@ -501,6 +546,10 @@ ol {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.1);
   color: var(--primary-white-color);
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .social-icon-footer {
   width: 20px;
@@ -544,14 +593,39 @@ ol {
   text-align: center;
   text-decoration: none;
   cursor: pointer;
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .nav-button:hover,
-.nav-button:focus,
-.nav-button:active {
+.nav-button:focus {
   background-color: var(--primary-accent-color);
   color: var(--primary-white-color);
   outline: none;
 }
+
+.portfolio-thumb {
+  width: 370px;
+  height: 294px;
+  overflow: hidden;
+}
+.card-link:hover .portfolio-overlay {
+  transform: translateY(-100%);
+}
+
+.portfolio-overlay {
+  width: 100%;
+  height: 100%;
+  padding: 63px 24px;
+  font-size: 18px;
+  line-height: 1.56;
+
+  color: #ffffff;
+  background-color: #2196f3e6;
+
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .card-list {
   display: flex;
   margin: -15px;
@@ -578,11 +652,15 @@ ol {
 .card-link {
   display: block;
   text-decoration: none;
+
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .card-link:hover,
 .card-link:focus {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
     1px 4px 6px rgba(0, 0, 0, 0.16);
+
+  /* transition: tramsform 250ms cubic-bezier(0.4, 0, 0.2, 1); */
 }
 
 .card.title {
@@ -600,4 +678,56 @@ ol {
   font-size: 16px;
   line-height: 1.88;
   text-decoration: none;
+}
+.backdrop {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  opacity: 1;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.backdrop.is-hidden .modal {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  min-width: 528px;
+  min-height: 521px;
+
+  background-color: #ffffff;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.close-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.button-svg {
+  width: 18px;
+  height: 18px;
 }
